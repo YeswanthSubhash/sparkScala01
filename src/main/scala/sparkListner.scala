@@ -10,7 +10,7 @@ object sparkListner {
     var reason=""
     val spark=SparkSession.builder().appName("SparkListner").master("local[*]").getOrCreate()
     val sc=spark.sparkContext
-    val df1=spark.read.option("header","true").csv("file://"+getClass.getResource("test.csv").getPath)
+    val df=spark.read.option("header","true").csv("file://"+getClass.getResource("test.csv").getPath)
 
 
     class customSparkListener extends SparkListener  {
@@ -27,7 +27,7 @@ object sparkListner {
 
     val myListner=new customSparkListener()
     sc.addSparkListener(myListner)
-    df1.write.csv("file:///C://Users//Midhun//Documents//result")
+    df.write.csv("file:///C://Users//Midhun//Documents//result")
 
 
     println(s"Records Read Count: $recordsReadCount")
